@@ -4,6 +4,11 @@ import lector
 import contar_palabra
 
 def obten_cita(texto,inicio,cuenta):
+'''
+Se obtiene la longitud de la lista, 
+aqui mismo se decide desde que palabra hasta que palabra se tomara la 
+cita que se imprimira al finalizar el proceso
+'''
     lista=texto.split(" ")
     longitud=len(lista)
     if ((inicio+cuenta)<longitud):
@@ -23,12 +28,10 @@ def main( archivo, inicio,cuenta ):
 if __name__ == "__main__":
   parser= argparse.ArgumentParser()
   parser.add_argument('-a','--archivo', dest='archivo', help="nombre de archivo", required=True)
-  #parser.add_argument('-s','--stopwords', dest='archivo_stopwords', help="nombre de archivo stopwords", required=False,default= "spanish_stopwords.txt")
   parser.add_argument('-i','--inicio', dest='inicio', help="numero donde iniciara la cita", required=True,default=9,type=int)
   parser.add_argument('-c','--cuenta', dest='cuenta', help="conteo", required=True, default= 10,type=int)
   args=parser.parse_args()
   archivo= args.archivo
- # archivo_sw= args.archivo_stopwords
   inicio=args.inicio
   cuenta=args.cuenta
   main(archivo,inicio,cuenta)
