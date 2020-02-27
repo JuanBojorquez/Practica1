@@ -2,6 +2,10 @@
 import argparse
 
 def leer_archivo( archivo ):
+  '''
+    recibe una cadena con el nombre del archivo leer
+    regresa una cadena de texto sin saltos de linea
+  '''
   try:
       with open(archivo,"r") as fh:
         texto = fh.read() 
@@ -14,6 +18,7 @@ def leer_archivo( archivo ):
     
 
 def contar_palabras( texto ):
+#Cuanta las palabras en el archivo y las suma si se repiten.
     palabras = texto.split(" ") 
     dp = dict() 
     for palabra in palabras: 
@@ -26,6 +31,7 @@ def contar_palabras( texto ):
     return dp
 
 def imprime_diccionario(dps, minimo):
+#Imprime el texto del archivo ya filtrado, es decir, sin las stopwords
     lista= [(k,v) for k,v in dps.items() if v >= minimo]
     lista_ordenada = sorted(lista, key= lambda x:x[1], reverse=True)
     for tupla in lista_ordenada:
@@ -33,6 +39,8 @@ def imprime_diccionario(dps, minimo):
     return
 
 def leer_stopwords(archivo):
+#Guarda todas las palabras que se encuentran en el archivo de stopwords
+#para almacenarlas en un set
      try:
          with open(archivo,'r') as fh:
              lista=fh.readlines()
@@ -44,6 +52,10 @@ def leer_stopwords(archivo):
      return set(lista_palabras)
 
 def limpia_diccionario(dp, set_stopwords):
+'''
+Elimina las palabras stop words que se encuentran en el archivo de stop_words
+de un texto que hayas tomado como parametro
+'''
     ndp={}
     for k,v in dp.items():
         if k.lower() not in set_stopwords:
